@@ -1,0 +1,54 @@
+﻿@page "/tasklist"
+
+<h3>TaskList</h3>
+
+<ul>
+    @foreach (var task in tasks)
+    {
+        <li>@task.ToString()</li>
+    }
+</ul>
+
+<input placeholder="Task name" @bind="newTaskName" />
+<input placeholder="Task points" @bind="newTaskPoints" />
+<button @onclick="AddTask">Add task</button>
+
+<button @onclick="ClearTasks">Delete all task</button>
+
+@inject Motiv.Interfaces.ITaskDatastore taskDatastore;
+
+@code {
+    private List<MotivTask> tasks = new();
+
+    private string newTaskName;
+    private int newTaskPoints;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var loadedTasks = await taskDatastore.Load();
+        tasks = new List<MotivTask>(loadedTasks);
+    }
+
+    private async Task AddTask()
+    {
+        if (!string.IsNullOrWhiteSpace(newTaskName))
+        {
+            tasks.Add(new MotivTask(newTaskName, newTaskPoints));
+            newTaskName = string.Empty;
+            newTaskPoints = 0;
+
+            await Save(tasks);
+        }
+    }
+
+    private async Task ClearTasks()
+    {
+        await taskDatastore.Clear();
+        tasks = new();
+    }
+
+    private async Task Save(List<MotivTask> tasks)
+    {
+        await taskDatastore.Save(tasks);
+    }
+}
