@@ -1,5 +1,6 @@
 ﻿using Motiv.Interfaces;
 using Motiv.Models;
+using Serilog;
 using System;
 using System.Threading.Tasks;
 
@@ -21,6 +22,7 @@ namespace Motiv.Controllers
 
         public Task SaveConfiguration(Configuration configuration)
         {
+            Log.Information("Recieved save config with object {@configuration}", configuration);
             return Task.CompletedTask;
         }
     }

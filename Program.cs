@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Motiv.Extensions;
+using Serilog;
+using Serilog.Debugging;
+using System;
 using System.Threading.Tasks;
 
 namespace Motiv
@@ -8,12 +11,32 @@ namespace Motiv
     {
         public static async Task Main(string[] args)
         {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("#app");
+            ConfigureLogging();
 
-            builder.Services.AddServices(builder.HostEnvironment.BaseAddress);
+            try
+            {
+                var builder = WebAssemblyHostBuilder.CreateDefault(args);
+                builder.RootComponents.Add<App>("#app");
 
-            await builder.Build().RunAsync();
+                builder.Services.AddServices(builder.HostEnvironment.BaseAddress);
+
+                await builder.Build().RunAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Exception during main executiong");
+                throw;
+            }
+        }
+
+        private static void ConfigureLogging()
+        {
+            SelfLog.Enable(message => Console.Error.WriteLine(message));
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.BrowserConsole()
+                .CreateLogger();
         }
     }
 }
