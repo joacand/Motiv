@@ -1,0 +1,59 @@
+﻿@page "/settings"
+
+<form>
+    <div class="border-bottom">
+        <h3>Configuration</h3>
+    </div>
+    <p>
+        <i>Use it or lose it</i> - Unused points are frozen if not used within this many days.
+        This is to prevent you from saving up points then spending them all at once.
+        A value of zero means the points will never be frozen.
+        The points not used are still accounted for in the statistics (default: 3 days)
+    </p>
+    <label for="useOrLose">Use or lose time span (days): </label>
+    <input type="text" id="useOrLose" name="useOrLose" placeholder="3" size="3" @bind="useOrLose">
+</form>
+<button @onclick="SaveConfiguration">Save configuration</button>
+
+<br />
+<br />
+
+<div class="border-bottom">
+    <h3>Data</h3>
+</div>
+<p>Export/import all saved data. Your data is saved in the browser. To make sure you don't lose your data it's good practise to export and backup regularly.</p>
+<button>Export</button>
+<button>Import</button>
+<br />
+<br />
+
+<p>Export/import the current task setup as a template to share with friends</p>
+<button>Export</button>
+<button>Import</button>
+<br />
+<br />
+
+<p>Clear all data (warning: cannot be reversed!)</p>
+<button @onclick="ClearAllData">Clear all data</button>
+
+@inject Motiv.Interfaces.ISettingsController settingsController;
+
+@code {
+    private int? useOrLose;
+
+    private async Task ClearAllData()
+    {
+        await settingsController.ClearAllData();
+    }
+
+    private async Task SaveConfiguration()
+    {
+        Models.Configuration newConfiguration = new()
+        {
+            UseOrLose = useOrLose
+        };
+        await settingsController.SaveConfiguration(newConfiguration);
+
+        useOrLose = null;
+    }
+}

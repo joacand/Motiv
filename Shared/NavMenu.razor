@@ -7,14 +7,19 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
-        <li class="nav-item px-3">
+        <li class="nav-item">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </li>
-        <li class="nav-item px-3">
+        <li class="nav-item">
             <NavLink class="nav-link" href="tasklist">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Task list
+            </NavLink>
+        </li>
+        <li class="nav-item">
+            <NavLink class="nav-link" href="settings">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Settings
             </NavLink>
         </li>
     </ul>

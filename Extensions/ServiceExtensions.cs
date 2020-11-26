@@ -1,7 +1,8 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.Extensions.DependencyInjection;
-using Motiv.Interfaces;
+using Motiv.Controllers;
 using Motiv.Datastores;
+using Motiv.Interfaces;
 using System;
 using System.Net.Http;
 
@@ -14,6 +15,7 @@ namespace Motiv.Extensions
             services.AddHttpClient(baseAddress);
             services.AddLocalStorage();
             services.AddDatastores();
+            services.AddControllers();
         }
 
         private static void AddHttpClient(this IServiceCollection services, string baseAddress)
@@ -30,6 +32,11 @@ namespace Motiv.Extensions
         private static void AddDatastores(this IServiceCollection services)
         {
             services.AddScoped<ITaskDatastore, TaskDatastore>();
+        }
+
+        private static void AddControllers(this IServiceCollection services)
+        {
+            services.AddScoped<ISettingsController, SettingsController>();
         }
     }
 }
