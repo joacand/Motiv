@@ -37,6 +37,7 @@ namespace Motiv.Extensions
         private static void AddControllers(this IServiceCollection services)
         {
             services.AddScoped<ISettingsController, SettingsController>();
+            services.AddScoped<ITaskListController, TaskListController>();
         }
     }
 }

@@ -7,5 +7,9 @@ namespace Motiv.Interfaces
     {
         Task ClearAllData();
         Task SaveConfiguration(Configuration configuration);
+        Task ExportAllData();
+        Task ImportAllData();
+        Task ExportTaskTemplate();
+        Task ImportTaskTemplate();
     }
 }
