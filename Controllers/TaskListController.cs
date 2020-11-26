@@ -12,7 +12,6 @@ namespace Motiv.Controllers
         public TaskListController(ITaskDatastore taskDatastore)
         {
             this.taskDatastore = taskDatastore ?? throw new ArgumentNullException(nameof(taskDatastore));
-
         }
 
         public async Task<List<MotivTask>> Load()

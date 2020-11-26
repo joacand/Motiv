@@ -8,7 +8,7 @@ using System.Net.Http;
 
 namespace Motiv.Extensions
 {
-    public static class ServiceExtensions
+    public static class ServiceCollectionExtensions
     {
         public static void AddServices(this IServiceCollection services, string baseAddress)
         {
@@ -26,7 +26,7 @@ namespace Motiv.Extensions
         private static void AddLocalStorage(this IServiceCollection services)
         {
             services.AddBlazoredLocalStorage(config =>
-             config.JsonSerializerOptions.WriteIndented = true);
+                config.JsonSerializerOptions.WriteIndented = true);
         }
 
         private static void AddDatastores(this IServiceCollection services)
