@@ -25,10 +25,10 @@
 <input placeholder="Task points" @bind="newTaskPoints" />
 <button @onclick="AddTask">Add task</button>
 
-@inject Motiv.Interfaces.ITaskListController taskListController;
+@inject Core.Interfaces.ITaskListController taskListController;
 
 @code {
-    private List<Models.MotivTask> tasks = new();
+    private List<Core.Models.MotivTask> tasks = new();
 
     private string newTaskName;
     private int newTaskPoints;
@@ -38,10 +38,10 @@
     {
         await taskListController.Init();
         var loadedTasks = await taskListController.Load();
-        tasks = new List<Models.MotivTask>(loadedTasks);
+        tasks = new List<Core.Models.MotivTask>(loadedTasks);
     }
 
-    private async Task CheckboxClicked(Models.MotivTask task, object eventValue)
+    private async Task CheckboxClicked(Core.Models.MotivTask task, object eventValue)
     {
         var value = (bool)eventValue;
         task.Completed = value;
@@ -53,7 +53,7 @@
     {
         if (!string.IsNullOrWhiteSpace(newTaskName))
         {
-            tasks.Add(new Models.MotivTask(newTaskName, newTaskPoints));
+            tasks.Add(new Core.Models.MotivTask(newTaskName, newTaskPoints));
             await taskListController.Save(tasks);
 
             newTaskName = string.Empty;

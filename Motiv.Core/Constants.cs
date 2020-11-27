@@ -1,4 +1,4 @@
-﻿namespace Motiv
+﻿namespace Motiv.Core
 {
     public static class Constants
     {

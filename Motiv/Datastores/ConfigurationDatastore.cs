@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
-using Motiv.Interfaces;
-using Motiv.Models;
+using Motiv.Core;
+using Motiv.Core.Interfaces;
+using Motiv.Core.Models;
 using System;
 using System.Threading.Tasks;
 

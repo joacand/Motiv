@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Motiv.Models
+namespace Motiv.Core.Models
 {
     public sealed class MotivDataAggregate
     {

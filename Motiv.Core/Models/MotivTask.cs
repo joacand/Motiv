@@ -1,4 +1,4 @@
-﻿namespace Motiv.Models
+﻿namespace Motiv.Core.Models
 {
     public record MotivTask(string TaskName, int Points)
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Motiv.Interfaces
+namespace Motiv.Core.Interfaces
 {
     public interface IDatastore<T>
     {

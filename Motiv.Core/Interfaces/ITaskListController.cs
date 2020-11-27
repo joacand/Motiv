@@ -1,8 +1,8 @@
-﻿using Motiv.Models;
+﻿using Motiv.Core.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Motiv.Interfaces
+namespace Motiv.Core.Interfaces
 {
     public interface ITaskListController
     {

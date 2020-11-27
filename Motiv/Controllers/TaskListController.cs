@@ -1,5 +1,5 @@
-﻿using Motiv.Interfaces;
-using Motiv.Models;
+﻿using Motiv.Core.Interfaces;
+using Motiv.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

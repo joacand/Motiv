@@ -1,5 +1,5 @@
-﻿using Motiv.Interfaces;
-using Motiv.Models;
+﻿using Motiv.Core.Interfaces;
+using Motiv.Core.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

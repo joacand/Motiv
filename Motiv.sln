@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Motiv", "Motiv.csproj", "{672062BD-EFFF-4B80-A207-23CCDD824FEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Motiv", "Motiv\Motiv.csproj", "{672062BD-EFFF-4B80-A207-23CCDD824FEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motiv.Core", "Motiv.Core\Motiv.Core.csproj", "{B694DE01-DAEA-4982-B891-17E94CB1DAFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{672062BD-EFFF-4B80-A207-23CCDD824FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{672062BD-EFFF-4B80-A207-23CCDD824FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{672062BD-EFFF-4B80-A207-23CCDD824FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B694DE01-DAEA-4982-B891-17E94CB1DAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B694DE01-DAEA-4982-B891-17E94CB1DAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B694DE01-DAEA-4982-B891-17E94CB1DAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B694DE01-DAEA-4982-B891-17E94CB1DAFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

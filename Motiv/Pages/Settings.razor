@@ -42,7 +42,7 @@
 <p>Clear all data (warning: cannot be reversed!)</p>
 <button @onclick="ClearAllData">Clear all data</button>
 
-@inject Motiv.Interfaces.ISettingsController settingsController;
+@inject Core.Interfaces.ISettingsController settingsController;
 
 @code {
     private int? useOrLose;
@@ -94,7 +94,7 @@
 
     private async Task SaveConfiguration()
     {
-        Models.Configuration newConfiguration = new()
+        Core.Models.Configuration newConfiguration = new()
         {
             UseOrLose = useOrLose
         };

@@ -1,7 +1,7 @@
-﻿using Motiv.Models;
+﻿using Motiv.Core.Models;
 using System.Threading.Tasks;
 
-namespace Motiv.Interfaces
+namespace Motiv.Core.Interfaces
 {
     public interface ISettingsController
     {

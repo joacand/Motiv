@@ -1,6 +1,6 @@
-﻿using Motiv.Models;
+﻿using Motiv.Core.Models;
 
-namespace Motiv.Interfaces
+namespace Motiv.Core.Interfaces
 {
     public interface IUserDataDatastore : IDatastore<UserData>
     { }

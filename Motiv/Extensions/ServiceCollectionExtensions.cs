@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Motiv.Controllers;
 using Motiv.Datastores;
-using Motiv.Interfaces;
+using Motiv.Core.Interfaces;
 using Motiv.Services;
 using System;
 using System.Net.Http;
