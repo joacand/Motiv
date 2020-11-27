@@ -5,7 +5,7 @@ using Motiv.Core.Models;
 using System;
 using System.Threading.Tasks;
 
-namespace Motiv.Datastores
+namespace Motiv.Infrastructure.Datastores
 {
     public class UserDataDatastore : IUserDataDatastore
     {

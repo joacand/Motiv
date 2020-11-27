@@ -1,9 +1,9 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.Extensions.DependencyInjection;
+using Motiv.Application.Services;
 using Motiv.Controllers;
-using Motiv.Datastores;
 using Motiv.Core.Interfaces;
-using Motiv.Services;
+using Motiv.Infrastructure.Datastores;
 using System;
 using System.Net.Http;
 

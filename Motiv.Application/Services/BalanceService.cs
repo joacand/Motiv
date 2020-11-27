@@ -3,7 +3,7 @@ using Motiv.Core.Models;
 using System;
 using System.Threading.Tasks;
 
-namespace Motiv.Services
+namespace Motiv.Application.Services
 {
     public class BalanceService : IBalanceService
     {

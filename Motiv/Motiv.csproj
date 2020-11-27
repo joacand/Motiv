@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Motiv.Application\Motiv.Application.csproj" />
     <ProjectReference Include="..\Motiv.Core\Motiv.Core.csproj" />
+    <ProjectReference Include="..\Motiv.Infrastructure\Motiv.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
