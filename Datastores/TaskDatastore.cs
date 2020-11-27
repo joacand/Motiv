@@ -1,7 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Motiv.Interfaces;
 using Motiv.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,10 +18,10 @@ namespace Motiv.Datastores
 
         public async Task<List<MotivTask>> Load()
         {
-            var taskList = await localStorageService.GetItemAsStringAsync(Constants.Datastore.TaskListKey);
+            var taskList = await localStorageService.GetItemAsync<List<MotivTask>>(Constants.Datastore.TaskListKey);
 
-            List<MotivTask> result = !string.IsNullOrWhiteSpace(taskList)
-                ? JsonConvert.DeserializeObject<List<MotivTask>>(taskList)
+            List<MotivTask> result = taskList is not null
+                ? taskList
                 : new();
 
             return result;
@@ -30,9 +29,7 @@ namespace Motiv.Datastores
 
         public async Task Save(List<MotivTask> toSave)
         {
-            var jsonSerialized = JsonConvert.SerializeObject(toSave);
-
-            await localStorageService.SetItemAsync(Constants.Datastore.TaskListKey, jsonSerialized);
+            await localStorageService.SetItemAsync(Constants.Datastore.TaskListKey, toSave);
         }
 
         public async Task Clear()

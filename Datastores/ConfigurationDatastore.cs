@@ -1,7 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Motiv.Interfaces;
 using Motiv.Models;
-using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -18,10 +17,10 @@ namespace Motiv.Datastores
 
         public async Task<Configuration> Load()
         {
-            var configuration = await localStorageService.GetItemAsStringAsync(Constants.Datastore.ConfigurationKey);
+            var configuration = await localStorageService.GetItemAsync<Configuration>(Constants.Datastore.ConfigurationKey);
 
-            Configuration result = !string.IsNullOrWhiteSpace(configuration)
-                ? JsonConvert.DeserializeObject<Configuration>(configuration)
+            Configuration result = configuration is not null
+                ? configuration
                 : new();
 
             return result;
@@ -29,9 +28,7 @@ namespace Motiv.Datastores
 
         public async Task Save(Configuration toSave)
         {
-            var jsonSerialized = JsonConvert.SerializeObject(toSave);
-
-            await localStorageService.SetItemAsync(Constants.Datastore.ConfigurationKey, jsonSerialized);
+            await localStorageService.SetItemAsync(Constants.Datastore.ConfigurationKey, toSave);
         }
 
         public async Task Clear()
