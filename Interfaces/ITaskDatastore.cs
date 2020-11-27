@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Motiv.Models;
+using System.Collections.Generic;
 
 namespace Motiv.Interfaces
 {

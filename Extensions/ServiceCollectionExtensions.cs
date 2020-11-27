@@ -32,6 +32,7 @@ namespace Motiv.Extensions
         private static void AddDatastores(this IServiceCollection services)
         {
             services.AddScoped<ITaskDatastore, TaskDatastore>();
+            services.AddScoped<IConfigurationDatastore, ConfigurationDatastore>();
         }
 
         private static void AddControllers(this IServiceCollection services)

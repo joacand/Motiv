@@ -1,5 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Motiv.Interfaces;
+using Motiv.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,9 @@ namespace Motiv.Datastores
 
         public async Task<List<MotivTask>> Load()
         {
-            var taskList = await localStorageService.GetItemAsync<string>(Constants.Datastore.TaskListKey);
+            var taskList = await localStorageService.GetItemAsStringAsync(Constants.Datastore.TaskListKey);
 
-            List<MotivTask> result = taskList is not null
+            List<MotivTask> result = !string.IsNullOrWhiteSpace(taskList)
                 ? JsonConvert.DeserializeObject<List<MotivTask>>(taskList)
                 : new();
 

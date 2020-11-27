@@ -18,7 +18,7 @@
     @inject Motiv.Interfaces.ITaskListController taskListController;
 
     @code {
-        private List<MotivTask> tasks = new();
+        private List<Models.MotivTask> tasks = new();
 
         private string newTaskName;
         private int newTaskPoints;
@@ -26,14 +26,14 @@
         protected override async Task OnInitializedAsync()
         {
             var loadedTasks = await taskListController.Load();
-            tasks = new List<MotivTask>(loadedTasks);
+            tasks = new List<Models.MotivTask>(loadedTasks);
         }
 
         private async Task AddTask()
         {
             if (!string.IsNullOrWhiteSpace(newTaskName))
             {
-                tasks.Add(new MotivTask(newTaskName, newTaskPoints));
+                tasks.Add(new Models.MotivTask(newTaskName, newTaskPoints));
                 await taskListController.Save(tasks);
 
                 newTaskName = string.Empty;

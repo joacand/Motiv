@@ -4,7 +4,8 @@
     {
         public static class Datastore
         {
-            public static string TaskListKey => "taskListKey";
+            public static string TaskListKey => "motiv.TaskListKey";
+            public static string ConfigurationKey => "motiv.ConfigurationKey";
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Motiv.Interfaces;
 using Motiv.Models;
-using Serilog;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Motiv.Controllers
@@ -9,45 +11,60 @@ namespace Motiv.Controllers
     public class SettingsController : ISettingsController
     {
         private readonly ITaskDatastore taskDatastore;
+        private readonly IConfigurationDatastore configurationDatastore;
 
-        public SettingsController(ITaskDatastore taskDatastore)
+        public SettingsController(
+            ITaskDatastore taskDatastore,
+            IConfigurationDatastore configurationDatastore)
         {
             this.taskDatastore = taskDatastore ?? throw new ArgumentNullException(nameof(taskDatastore));
+            this.configurationDatastore = configurationDatastore ?? throw new ArgumentNullException(nameof(configurationDatastore));
         }
 
         public async Task ClearAllData()
         {
             await taskDatastore.Clear();
+            await configurationDatastore.Clear();
         }
 
-        public Task ExportAllData()
+        public async Task<string> ExportAllData()
         {
-            Log.Information("Recieved ExportAllData");
-            return Task.CompletedTask;
+            MotivDataAggregate dataAggregate = new()
+            {
+                Config = await configurationDatastore.Load(),
+                Tasks = await taskDatastore.Load()
+            };
+            return JsonConvert.SerializeObject(dataAggregate);
         }
 
-        public Task ExportTaskTemplate()
+        public async Task ImportAllData(string jsonData)
         {
-            Log.Information("Recieved ExportTaskTemplate");
-            return Task.CompletedTask;
+            var dataAggregate = JsonConvert.DeserializeObject<MotivDataAggregate>(jsonData);
+            await taskDatastore.Save(dataAggregate.Tasks);
+            await configurationDatastore.Save(dataAggregate.Config);
         }
 
-        public Task ImportAllData()
+        public async Task<string> ExportTaskTemplate()
         {
-            Log.Information("Recieved ImportAllData");
-            return Task.CompletedTask;
+            var taskList = (await taskDatastore.Load())
+                .Select(x => x.NoStateClone());
+            return JsonConvert.SerializeObject(taskList);
         }
 
-        public Task ImportTaskTemplate()
+        public async Task ImportTaskTemplate(string jsonData)
         {
-            Log.Information("Recieved ImportTaskTemplate");
-            return Task.CompletedTask;
+            var taskList = JsonConvert.DeserializeObject<List<MotivTask>>(jsonData);
+            await taskDatastore.Save(taskList);
         }
 
-        public Task SaveConfiguration(Configuration configuration)
+        public async Task<Configuration> LoadConfiguration()
         {
-            Log.Information("Recieved save config with object {@configuration}", configuration);
-            return Task.CompletedTask;
+            return await configurationDatastore.Load();
+        }
+
+        public async Task SaveConfiguration(Configuration configuration)
+        {
+            await configurationDatastore.Save(configuration);
         }
     }
 }

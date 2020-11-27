@@ -22,12 +22,18 @@
     <h3>Data</h3>
 </div>
 <p>Export/import all saved data. Your data is saved in the browser. To make sure you don't lose your data it's good practise to export and backup regularly.</p>
+<form>
+    <textarea rows="5" cols="60" name="allData" placeholder="Enter import data here..." @bind="allDataTextArea" />
+</form>
 <button @onclick="ExportAllData">Export</button>
 <button @onclick="ImportAllData">Import</button>
 <br />
 <br />
 
 <p>Export/import the current task setup as a template to share with friends</p>
+<form>
+    <textarea rows="5" cols="60" name="taskTemplateData" placeholder="Enter import data here..." @bind="taskTemplateTextArea" />
+</form>
 <button @onclick="ExportTaskTemplate">Export</button>
 <button @onclick="ImportTaskTemplate">Import</button>
 <br />
@@ -40,6 +46,14 @@
 
 @code {
     private int? useOrLose;
+    private string allDataTextArea;
+    private string taskTemplateTextArea;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var configuration = await settingsController.LoadConfiguration();
+        useOrLose = configuration.UseOrLose;
+    }
 
     private async Task ClearAllData()
     {
@@ -48,22 +62,34 @@
 
     private async Task ExportAllData()
     {
-        await settingsController.ExportAllData();
+        var allData = await settingsController.ExportAllData();
+        allDataTextArea = allData;
     }
 
     private async Task ImportAllData()
     {
-        await settingsController.ImportAllData();
+        if (!string.IsNullOrWhiteSpace(allDataTextArea))
+        {
+            await settingsController.ImportAllData(allDataTextArea);
+            allDataTextArea = string.Empty;
+
+            await OnInitializedAsync();
+        }
     }
 
     private async Task ExportTaskTemplate()
     {
-        await settingsController.ExportTaskTemplate();
+        var taskTemplateData = await settingsController.ExportTaskTemplate();
+        taskTemplateTextArea = taskTemplateData;
     }
 
     private async Task ImportTaskTemplate()
     {
-        await settingsController.ImportTaskTemplate();
+        if (!string.IsNullOrWhiteSpace(taskTemplateTextArea))
+        {
+            await settingsController.ImportTaskTemplate(taskTemplateTextArea);
+            taskTemplateTextArea = string.Empty;
+        }
     }
 
     private async Task SaveConfiguration()

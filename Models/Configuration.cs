@@ -1,7 +1,7 @@
 ﻿namespace Motiv.Models
 {
-    public record Configuration()
+    public record Configuration
     {
-        public int? UseOrLose { get; set; }
+        public int? UseOrLose { get; set; } = 3;
     }
 }
