@@ -3,3 +3,61 @@
 <div class="border-bottom">
     <h3>Motiv!</h3>
 </div>
+
+<ul>
+    @foreach (var task in tasks)
+    {
+        <li>
+            <label>@task.TaskName</label> <label>(@task.Points)</label>
+            <input type="checkbox" disabled="@task.NotCompletable" checked="@task.Completed" @onchange="async eventargs => { await CheckboxClicked(task, eventargs.Value); }">
+        </li>
+    }
+</ul>
+
+<div class="border-bottom">
+    <h6>Balance: @Balance</h6>
+</div>
+
+<br />
+<br />
+
+<input placeholder="Task name" @bind="newTaskName" />
+<input placeholder="Task points" @bind="newTaskPoints" />
+<button @onclick="AddTask">Add task</button>
+
+@inject Motiv.Interfaces.ITaskListController taskListController;
+
+@code {
+    private List<Models.MotivTask> tasks = new();
+
+    private string newTaskName;
+    private int newTaskPoints;
+    private int Balance => taskListController.Balance;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await taskListController.Init();
+        var loadedTasks = await taskListController.Load();
+        tasks = new List<Models.MotivTask>(loadedTasks);
+    }
+
+    private async Task CheckboxClicked(Models.MotivTask task, object eventValue)
+    {
+        var value = (bool)eventValue;
+        task.Completed = value;
+
+        await taskListController.CompleteTask(task, value, tasks);
+    }
+
+    private async Task AddTask()
+    {
+        if (!string.IsNullOrWhiteSpace(newTaskName))
+        {
+            tasks.Add(new Models.MotivTask(newTaskName, newTaskPoints));
+            await taskListController.Save(tasks);
+
+            newTaskName = string.Empty;
+            newTaskPoints = 0;
+        }
+    }
+}

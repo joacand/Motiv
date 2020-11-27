@@ -12,19 +12,23 @@ namespace Motiv.Controllers
     {
         private readonly ITaskDatastore taskDatastore;
         private readonly IConfigurationDatastore configurationDatastore;
+        private readonly IUserDataDatastore userDataDatastore;
 
         public SettingsController(
             ITaskDatastore taskDatastore,
-            IConfigurationDatastore configurationDatastore)
+            IConfigurationDatastore configurationDatastore,
+            IUserDataDatastore userDataDatastore)
         {
             this.taskDatastore = taskDatastore ?? throw new ArgumentNullException(nameof(taskDatastore));
             this.configurationDatastore = configurationDatastore ?? throw new ArgumentNullException(nameof(configurationDatastore));
+            this.userDataDatastore = userDataDatastore ?? throw new ArgumentNullException(nameof(userDataDatastore));
         }
 
         public async Task ClearAllData()
         {
             await taskDatastore.Clear();
             await configurationDatastore.Clear();
+            await userDataDatastore.Clear();
         }
 
         public async Task<string> ExportAllData()
@@ -32,7 +36,8 @@ namespace Motiv.Controllers
             MotivDataAggregate dataAggregate = new()
             {
                 Config = await configurationDatastore.Load(),
-                Tasks = await taskDatastore.Load()
+                Tasks = await taskDatastore.Load(),
+                UserData = await userDataDatastore.Load()
             };
             return JsonConvert.SerializeObject(dataAggregate);
         }
@@ -42,6 +47,7 @@ namespace Motiv.Controllers
             var dataAggregate = JsonConvert.DeserializeObject<MotivDataAggregate>(jsonData);
             await taskDatastore.Save(dataAggregate.Tasks);
             await configurationDatastore.Save(dataAggregate.Config);
+            await userDataDatastore.Save(dataAggregate.UserData);
         }
 
         public async Task<string> ExportTaskTemplate()

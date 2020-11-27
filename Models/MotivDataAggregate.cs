@@ -6,5 +6,6 @@ namespace Motiv.Models
     {
         public Configuration Config { get; set; }
         public List<MotivTask> Tasks { get; set; }
+        public UserData UserData { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Motiv.Controllers;
 using Motiv.Datastores;
 using Motiv.Interfaces;
+using Motiv.Services;
 using System;
 using System.Net.Http;
 
@@ -16,6 +17,7 @@ namespace Motiv.Extensions
             services.AddLocalStorage();
             services.AddDatastores();
             services.AddControllers();
+            services.AddApplicationServices();
         }
 
         private static void AddHttpClient(this IServiceCollection services, string baseAddress)
@@ -39,6 +41,12 @@ namespace Motiv.Extensions
         {
             services.AddScoped<ISettingsController, SettingsController>();
             services.AddScoped<ITaskListController, TaskListController>();
+            services.AddScoped<IUserDataDatastore, UserDataDatastore>();
+        }
+
+        private static void AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<IBalanceService, BalanceService>();
         }
     }
 }

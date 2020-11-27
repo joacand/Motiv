@@ -6,6 +6,7 @@
         {
             public static string TaskListKey => "motiv.TaskListKey";
             public static string ConfigurationKey => "motiv.ConfigurationKey";
+            public static string UserDataKey => "motiv.UserData";
         }
     }
 }
