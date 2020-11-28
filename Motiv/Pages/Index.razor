@@ -25,7 +25,7 @@
 <input placeholder="Task points" @bind="newTaskPoints" />
 <button @onclick="AddTask">Add task</button>
 
-@inject Core.Interfaces.ITaskListController taskListController;
+@inject Interfaces.ITaskListController taskListController;
 
 @code {
     private List<Core.Models.MotivTask> tasks = new();

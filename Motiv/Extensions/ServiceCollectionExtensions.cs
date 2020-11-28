@@ -4,6 +4,7 @@ using Motiv.Application.Services;
 using Motiv.Controllers;
 using Motiv.Core.Interfaces;
 using Motiv.Infrastructure.Datastores;
+using Motiv.Interfaces;
 using System;
 using System.Net.Http;
 
@@ -42,6 +43,7 @@ namespace Motiv.Extensions
             services.AddScoped<ISettingsController, SettingsController>();
             services.AddScoped<ITaskListController, TaskListController>();
             services.AddScoped<IUserDataDatastore, UserDataDatastore>();
+            services.AddScoped<IReportsController, ReportsController>();
         }
 
         private static void AddApplicationServices(this IServiceCollection services)

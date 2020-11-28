@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Motiv.Core.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Motiv.Core.Interfaces
 {
@@ -9,5 +11,7 @@ namespace Motiv.Core.Interfaces
         void SubtractBalance(int points);
         void AddBalance(int points);
         Task Save();
+        List<Transaction> Transactions { get; }
+        List<Transaction> TransactionsPerDay(int daysToFetch);
     }
 }
