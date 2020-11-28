@@ -4,6 +4,34 @@
     <h3>Reports</h3>
 </div>
 
-@code {
+<br />
 
+<form>
+    <label for="daysToPlot">Days to plot: </label>
+    <input type="text" id="daysToPlot" name="daysToPlot" placeholder="7" size="3" @bind="daysToPlot">
+</form>
+<button @onclick="UpdatePlot">Update</button>
+
+<Chart Config="config" @ref="chart"></Chart>
+
+@using ChartJs.Blazor.LineChart
+
+@inject Interfaces.IReportsController reportsController;
+
+@code {
+    private LineConfig config;
+    private Chart chart;
+    private int daysToPlot = 7;
+
+    private void UpdatePlot()
+    {
+        reportsController.UpdateConfig(config, daysToPlot);
+        chart.Update();
+    }
+
+    protected override void OnInitialized()
+    {
+        config = reportsController.GenerateLineConfig();
+        reportsController.UpdateConfig(config, daysToPlot);
+    }
 }

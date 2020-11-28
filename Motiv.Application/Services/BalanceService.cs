@@ -1,6 +1,8 @@
 ﻿using Motiv.Core.Interfaces;
 using Motiv.Core.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Motiv.Application.Services
@@ -42,5 +44,30 @@ namespace Motiv.Application.Services
         }
 
         public int Balance => UserData?.CurrentBalance ?? 0;
+
+        public List<Transaction> Transactions => UserData?.Transactions ?? new();
+
+        public List<Transaction> TransactionsPerDay(int daysToFetch)
+        {
+            var allTransactions = Transactions;
+
+            var perDay = allTransactions.GroupBy(x => x.Date.Date).TakeLast(daysToFetch);
+
+            List<Transaction> result = new();
+
+            foreach (var dateTransactions in perDay)
+            {
+                var latestEntry = dateTransactions.LastOrDefault();
+                if (latestEntry is not null)
+                {
+                    result.Add(new Transaction(latestEntry.Balance)
+                    {
+                        Date = latestEntry.Date
+                    });
+                }
+            }
+
+            return result;
+        }
     }
 }

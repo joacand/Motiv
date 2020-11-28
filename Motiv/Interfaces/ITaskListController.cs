@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Motiv.Core.Interfaces
+namespace Motiv.Interfaces
 {
     public interface ITaskListController
     {

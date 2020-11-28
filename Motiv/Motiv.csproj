@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
+    <PackageReference Include="ChartJs.Blazor.Fork" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0" PrivateAssets="all" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
@@ -18,6 +19,12 @@
     <ProjectReference Include="..\Motiv.Application\Motiv.Application.csproj" />
     <ProjectReference Include="..\Motiv.Core\Motiv.Core.csproj" />
     <ProjectReference Include="..\Motiv.Infrastructure\Motiv.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="C:\Users\Joac\.nuget\packages\chartjs.blazor.fork\2.0.0\contentFiles\any\netstandard2.1\wwwroot\ChartJsBlazorInterop.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
