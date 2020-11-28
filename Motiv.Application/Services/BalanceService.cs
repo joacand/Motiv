@@ -26,12 +26,14 @@ namespace Motiv.Application.Services
 
         public void SubtractBalance(int points)
         {
-            UserData.Balance -= points;
+            var newBalance = UserData.CurrentBalance - points;
+            UserData.CreateTransaction(newBalance);
         }
 
         public void AddBalance(int points)
         {
-            UserData.Balance += points;
+            var newBalance = UserData.CurrentBalance + points;
+            UserData.CreateTransaction(newBalance);
         }
 
         public async Task Save()
@@ -39,6 +41,6 @@ namespace Motiv.Application.Services
             await userDataDatastore.Save(UserData);
         }
 
-        public int Balance => UserData?.Balance ?? 0;
+        public int Balance => UserData?.CurrentBalance ?? 0;
     }
 }

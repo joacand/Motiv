@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Motiv", "Motiv\Motiv.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Motiv.Core", "Motiv.Core\Motiv.Core.csproj", "{B694DE01-DAEA-4982-B891-17E94CB1DAFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motiv.Infrastructure", "Motiv.Infrastructure\Motiv.Infrastructure.csproj", "{25F7A249-B4FA-43A1-8EAD-D00AB7A73A6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Motiv.Infrastructure", "Motiv.Infrastructure\Motiv.Infrastructure.csproj", "{25F7A249-B4FA-43A1-8EAD-D00AB7A73A6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motiv.Application", "Motiv.Application\Motiv.Application.csproj", "{88A461A8-A9E7-4695-BA01-B069A4D65864}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Motiv.Application", "Motiv.Application\Motiv.Application.csproj", "{88A461A8-A9E7-4695-BA01-B069A4D65864}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
