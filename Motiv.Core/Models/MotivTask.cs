@@ -9,5 +9,12 @@
         {
             return new MotivTask(TaskName, Points);
         }
+
+        public string Style()
+        {
+            return Points > 0
+                ? Constants.CSS.PositiveStyle
+                : Constants.CSS.NegativeStyle;
+        }
     }
 }

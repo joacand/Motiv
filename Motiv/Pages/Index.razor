@@ -4,15 +4,20 @@
     <h3>Motiv!</h3>
 </div>
 
-<ul>
+<ul class="taskList">
     @foreach (var task in tasks)
     {
-        <li>
-            <label>@task.TaskName</label> <label>(@task.Points)</label>
+    <li class="taskListItem @task.Style()">
+        <label class="container">
             <input type="checkbox" disabled="@task.NotCompletable" checked="@task.Completed" @onchange="async eventargs => { await CheckboxClicked(task, eventargs.Value); }">
-        </li>
+            <span class="checkmark"></span>
+            @task.TaskName (@task.Points)
+        </label>
+    </li>
     }
 </ul>
+
+<br />
 
 <div class="border-bottom">
     <h6>Balance: @Balance</h6>

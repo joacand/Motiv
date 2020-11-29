@@ -11,8 +11,9 @@
         The points not used are still accounted for in the statistics (default: 3 days)
     </p>
     <label for="useOrLose">Use or lose time span (days): </label>
-    <input type="text" id="useOrLose" name="useOrLose" placeholder="3" size="3" @bind="useOrLose">
+    <input type="text" id="useOrLose" name="useOrLose" placeholder="3" size="3" class="settingsInput" @bind="useOrLose">
 </form>
+<br />
 <button @onclick="SaveConfiguration">Save configuration</button>
 
 <br />

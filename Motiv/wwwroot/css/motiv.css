@@ -1,0 +1,122 @@
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+button {
+    background-color: #485074;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 0px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: #30324A;
+        color: white;
+    }
+
+
+ul.taskList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: 800px;
+}
+
+    ul.taskList li.taskListItem {
+        position: relative;
+        font-size: 16px;
+        transition: 0.2s;
+        padding: 0px 0px 1px 0px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    ul.taskList li:hover {
+        background: #ddd;
+    }
+
+li.taskListItemPos {
+    background: #edffeb;
+}
+
+li.taskListItemNeg {
+    background: #ffeeeb;
+}
+
+.container {
+    display: block;
+    position: relative;
+    padding: 6px 4px 6px 45px;
+    margin-bottom: 0px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 36px;
+    width: 36px;
+    background-color: #eee;
+}
+
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #485074;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container .checkmark:after {
+    left: 14px;
+    top: 8px;
+    width: 8px;
+    height: 16px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.settingsInput {
+    padding: 2px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: #F3F4F7;
+    outline: none;
+}

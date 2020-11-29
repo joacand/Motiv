@@ -2,11 +2,12 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #F3F4F7;
+    background-color: white;
 }
 
 .main {
     flex: 1;
+    background-color: white;
 }
 
 .sidebar {

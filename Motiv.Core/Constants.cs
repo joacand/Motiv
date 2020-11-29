@@ -24,5 +24,11 @@ namespace Motiv.Core
                 public static readonly Color Grey = Color.FromArgb(201, 203, 207);
             }
         }
+
+        public static class CSS
+        {
+            public static string PositiveStyle => "taskListItemPos";
+            public static string NegativeStyle => "taskListItemNeg";
+        }
     }
 }
