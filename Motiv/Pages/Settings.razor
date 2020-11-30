@@ -13,7 +13,6 @@
     <label for="useOrLose">Use or lose time span (days): </label>
     <input type="text" id="useOrLose" name="useOrLose" placeholder="3" size="3" class="settingsInput" @bind="useOrLose">
 </form>
-<br />
 <button @onclick="SaveConfiguration">Save configuration</button>
 
 <br />
@@ -24,7 +23,7 @@
 </div>
 <p>Export/import all saved data. Your data is saved in the browser. To make sure you don't lose your data it's good practise to export and backup regularly.</p>
 <form>
-    <textarea rows="5" cols="60" name="allData" placeholder="Enter import data here..." @bind="allDataTextArea" />
+    <textarea rows="5" cols="60" name="allData" placeholder="Enter import data here..." class="settingsInput" @bind="allDataTextArea" />
 </form>
 <button @onclick="ExportAllData">Export</button>
 <button @onclick="ImportAllData">Import</button>
@@ -33,7 +32,7 @@
 
 <p>Export/import the current task setup as a template to share with friends</p>
 <form>
-    <textarea rows="5" cols="60" name="taskTemplateData" placeholder="Enter import data here..." @bind="taskTemplateTextArea" />
+    <textarea rows="5" cols="60" name="taskTemplateData" placeholder="Enter import data here..." class="settingsInput" @bind="taskTemplateTextArea" />
 </form>
 <button @onclick="ExportTaskTemplate">Export</button>
 <button @onclick="ImportTaskTemplate">Import</button>

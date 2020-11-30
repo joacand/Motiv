@@ -47,11 +47,9 @@ namespace Motiv.Application.Services
 
         public List<Transaction> Transactions => UserData?.Transactions ?? new();
 
-        public List<Transaction> TransactionsPerDay(int daysToFetch)
+        public List<Transaction> GetTransactionsPerDay(int daysToFetch)
         {
-            var allTransactions = Transactions;
-
-            var perDay = allTransactions.GroupBy(x => x.Date.Date).TakeLast(daysToFetch);
+            var perDay = Transactions.GroupBy(x => x.Date.Date).TakeLast(daysToFetch);
 
             List<Transaction> result = new();
 
@@ -63,6 +61,26 @@ namespace Motiv.Application.Services
                     result.Add(new Transaction(latestEntry.Balance)
                     {
                         Date = latestEntry.Date
+                    });
+                }
+            }
+
+            return result;
+        }
+
+        public List<Transaction> GetTransactions(int daysToFetch)
+        {
+            List<Transaction> result = new();
+
+            var perDay = Transactions.GroupBy(x => x.Date.Date).TakeLast(daysToFetch);
+
+            foreach (var dateTransactions in perDay)
+            {
+                foreach (var transaction in dateTransactions)
+                {
+                    result.Add(new Transaction(transaction.Balance)
+                    {
+                        Date = transaction.Date
                     });
                 }
             }

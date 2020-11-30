@@ -1,5 +1,6 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    max-width: 1366px;
 }
 
 button {
@@ -33,7 +34,6 @@ ul.taskList {
         position: relative;
         font-size: 16px;
         transition: 0.2s;
-        padding: 0px 0px 1px 0px;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -79,7 +79,7 @@ li.taskListItemNeg {
     left: 0;
     height: 36px;
     width: 36px;
-    background-color: #eee;
+    background-color: #fff;
 }
 
 .container:hover input ~ .checkmark {
@@ -115,6 +115,7 @@ li.taskListItemNeg {
 .settingsInput {
     padding: 2px;
     display: block;
+    margin-bottom: 8px;
     border: none;
     border-bottom: 1px solid #ccc;
     background-color: #F3F4F7;

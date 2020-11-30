@@ -5,6 +5,7 @@ using ChartJs.Blazor.Common.Enums;
 using ChartJs.Blazor.LineChart;
 using ChartJs.Blazor.Util;
 using Motiv.Core.Interfaces;
+using Motiv.Core.Models;
 using Motiv.Extensions;
 using Motiv.Interfaces;
 using System;
@@ -77,20 +78,30 @@ namespace Motiv.Controllers
             };
         }
 
+        public List<Transaction> GetTransactionHistory(int days)
+        {
+            return balanceService.GetTransactions(days);
+        }
+
+        public List<Transaction> GetTransactionHistoryPerDay(int days)
+        {
+            return balanceService.GetTransactionsPerDay(days);
+        }
+
         public void UpdateConfig(LineConfig config, int daysToPlot)
         {
             config.Data.Datasets.Clear();
             config.Data.Labels.Clear();
 
-            IDataset<int> dataSet = new LineDataset<int>(balanceService.TransactionsPerDay(daysToPlot).Select(x => x.Balance))
+            IDataset<int> dataSet = new LineDataset<int>(balanceService.GetTransactionsPerDay(daysToPlot).Select(x => x.Balance))
             {
                 Label = "Balance history",
-                BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Blue),
-                BorderColor = ColorUtil.FromDrawingColor(ChartColors.Blue),
-                Fill = FillingMode.Disabled
+                BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.MotivLight),
+                BorderColor = ColorUtil.FromDrawingColor(ChartColors.MotivDark),
+                Fill = FillingMode.Origin
             };
 
-            config.Data.Labels.AddRange(balanceService.TransactionsPerDay(daysToPlot));
+            config.Data.Labels.AddRange(balanceService.GetTransactionsPerDay(daysToPlot));
             config.Data.Datasets.Add(dataSet);
         }
     }

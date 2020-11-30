@@ -12,6 +12,7 @@ namespace Motiv.Core.Interfaces
         void AddBalance(int points);
         Task Save();
         List<Transaction> Transactions { get; }
-        List<Transaction> TransactionsPerDay(int daysToFetch);
+        List<Transaction> GetTransactionsPerDay(int daysToFetch);
+        List<Transaction> GetTransactions(int daysToFetch);
     }
 }

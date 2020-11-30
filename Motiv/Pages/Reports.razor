@@ -1,7 +1,7 @@
 ﻿@page "/reports"
 
 <div class="border-bottom">
-    <h3>Reports</h3>
+    <h3>Balance history</h3>
 </div>
 
 <br />
@@ -14,7 +14,60 @@
 
 <Chart Config="config" @ref="chart"></Chart>
 
+<div class="border-bottom">
+    <h3>Transaction history</h3>
+</div>
+
+<label>
+    Squash history per day:
+    <input type="checkbox" checked="@squashHistoryPerDay" @onchange="e => CheckboxChanged(e.Value)">
+</label>
+
+<table role="grid">
+    <tbody>
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Balance
+            </th>
+        </tr>
+
+        @foreach (var transaction in transactionHistory)
+        {
+            <tr>
+                <td>
+                    @transaction.Date.ToString("yyyy-MM-dd")
+                </td>
+                <td>
+                    @transaction.Type
+                </td>
+                <td>
+                    @transaction.Description
+                </td>
+                <td>
+                    @transaction.Amount
+                </td>
+                <td>
+                    @transaction.Balance
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 @using ChartJs.Blazor.LineChart
+@using Core.Models;
 
 @inject Interfaces.IReportsController reportsController;
 
@@ -22,16 +75,35 @@
     private LineConfig config;
     private Chart chart;
     private int daysToPlot = 7;
+    private bool squashHistoryPerDay = true;
+
+    private List<Transaction> transactionHistory;
+
+    private void CheckboxChanged(object eventValue)
+    {
+        var value = (bool)eventValue;
+        squashHistoryPerDay = value;
+        LoadTransactionHistory(daysToPlot);
+    }
 
     private void UpdatePlot()
     {
         reportsController.UpdateConfig(config, daysToPlot);
         chart.Update();
+        LoadTransactionHistory(daysToPlot);
     }
 
     protected override void OnInitialized()
     {
         config = reportsController.GenerateLineConfig();
         reportsController.UpdateConfig(config, daysToPlot);
+        LoadTransactionHistory(daysToPlot);
+    }
+
+    private void LoadTransactionHistory(int days)
+    {
+        transactionHistory = new List<Transaction>(squashHistoryPerDay
+            ? reportsController.GetTransactionHistoryPerDay(days)
+            : reportsController.GetTransactionHistory(days));
     }
 }
