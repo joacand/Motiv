@@ -18,6 +18,11 @@ namespace Motiv.Infrastructure.Datastores
 
         public async Task<UserData> Load()
         {
+            if (!await localStorageService.ContainKeyAsync(Constants.Datastore.UserDataKey))
+            {
+                return new();
+            }
+
             var userData = await localStorageService.GetItemAsync<UserData>(Constants.Datastore.UserDataKey);
 
             UserData result = userData is not null

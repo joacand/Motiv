@@ -38,11 +38,11 @@ namespace Motiv.Controllers
 
                 if (completeState)
                 {
-                    balanceService.AddBalance(taskToEdit.Points);
+                    balanceService.AddBalance(taskToEdit);
                 }
                 else
                 {
-                    balanceService.SubtractBalance(taskToEdit.Points);
+                    balanceService.SubtractBalance(taskToEdit);
                 }
 
                 ChangeCompletableState(allTasks);

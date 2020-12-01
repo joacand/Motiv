@@ -8,9 +8,9 @@ namespace Motiv.Core.Models
         public int CurrentBalance => Transactions.LastOrDefault()?.Balance ?? default;
         public List<Transaction> Transactions { get; set; } = new();
 
-        public void CreateTransaction(int newBalance)
+        public void CreateTransaction(int newBalance, MotivTask task)
         {
-            Transactions.Add(new Transaction(newBalance));
+            Transactions.Add(new Transaction(newBalance, task.Points, task.TaskName));
         }
     }
 }

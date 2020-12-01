@@ -8,8 +8,8 @@ namespace Motiv.Core.Interfaces
     {
         int Balance { get; }
         Task Init();
-        void SubtractBalance(int points);
-        void AddBalance(int points);
+        void SubtractBalance(MotivTask task);
+        void AddBalance(MotivTask task);
         Task Save();
         List<Transaction> Transactions { get; }
         List<Transaction> GetTransactionsPerDay(int daysToFetch);

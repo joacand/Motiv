@@ -18,6 +18,11 @@ namespace Motiv.Infrastructure.Datastores
 
         public async Task<Configuration> Load()
         {
+            if (!await localStorageService.ContainKeyAsync(Constants.Datastore.ConfigurationKey))
+            {
+                return new();
+            }
+
             var configuration = await localStorageService.GetItemAsync<Configuration>(Constants.Datastore.ConfigurationKey);
 
             Configuration result = configuration is not null

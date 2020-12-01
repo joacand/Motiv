@@ -19,6 +19,11 @@ namespace Motiv.Infrastructure.Datastores
 
         public async Task<List<MotivTask>> Load()
         {
+            if (!await localStorageService.ContainKeyAsync(Constants.Datastore.TaskListKey))
+            {
+                return new();
+            }
+
             var taskList = await localStorageService.GetItemAsync<List<MotivTask>>(Constants.Datastore.TaskListKey);
 
             List<MotivTask> result = taskList is not null

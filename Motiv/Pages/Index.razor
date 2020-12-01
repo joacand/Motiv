@@ -60,7 +60,7 @@
     {
         if (!string.IsNullOrWhiteSpace(newTaskName))
         {
-            tasks.Add(new Core.Models.MotivTask(newTaskName, newTaskPoints));
+            tasks.Add(Core.Models.MotivTask.OneDayTask(newTaskName, newTaskPoints));
             await taskListController.Save(tasks);
 
             newTaskName = string.Empty;

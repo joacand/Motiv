@@ -26,16 +26,16 @@ namespace Motiv.Application.Services
             }
         }
 
-        public void SubtractBalance(int points)
+        public void SubtractBalance(MotivTask task)
         {
-            var newBalance = UserData.CurrentBalance - points;
-            UserData.CreateTransaction(newBalance);
+            var newBalance = UserData.CurrentBalance - task.Points;
+            UserData.CreateTransaction(newBalance, task);
         }
 
-        public void AddBalance(int points)
+        public void AddBalance(MotivTask task)
         {
-            var newBalance = UserData.CurrentBalance + points;
-            UserData.CreateTransaction(newBalance);
+            var newBalance = UserData.CurrentBalance + task.Points;
+            UserData.CreateTransaction(newBalance, task);
         }
 
         public async Task Save()
@@ -58,7 +58,7 @@ namespace Motiv.Application.Services
                 var latestEntry = dateTransactions.LastOrDefault();
                 if (latestEntry is not null)
                 {
-                    result.Add(new Transaction(latestEntry.Balance)
+                    result.Add(latestEntry with
                     {
                         Date = latestEntry.Date
                     });
@@ -78,7 +78,7 @@ namespace Motiv.Application.Services
             {
                 foreach (var transaction in dateTransactions)
                 {
-                    result.Add(new Transaction(transaction.Balance)
+                    result.Add(transaction with
                     {
                         Date = transaction.Date
                     });
