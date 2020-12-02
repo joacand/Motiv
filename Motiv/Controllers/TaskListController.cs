@@ -34,7 +34,7 @@ namespace Motiv.Controllers
 
             if (taskToEdit is not null)
             {
-                taskToEdit.Completed = completeState;
+                taskToEdit.SetCompleted(completeState);
 
                 if (completeState)
                 {

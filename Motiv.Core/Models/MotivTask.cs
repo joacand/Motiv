@@ -19,7 +19,6 @@ namespace Motiv.Core.Models
             }
             set {
                 completed = value;
-                TimeCompleted = DateTime.UtcNow;
             }
         }
 
@@ -31,6 +30,12 @@ namespace Motiv.Core.Models
         private bool NotResetByDays()
         {
             return (DateTime.UtcNow.Date - TimeCompleted.Date).Days < DaysUntilReset;
+        }
+
+        public void SetCompleted(bool value)
+        {
+            Completed = value;
+            TimeCompleted = DateTime.UtcNow;
         }
 
         public MotivTask NoStateClone()
