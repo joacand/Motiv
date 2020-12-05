@@ -7,6 +7,7 @@ namespace Motiv.Core.Interfaces
     public interface IBalanceService
     {
         int Balance { get; }
+        Task<int> SpendableBalance();
         Task Init();
         void SubtractBalance(MotivTask task);
         void AddBalance(MotivTask task);

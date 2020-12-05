@@ -13,7 +13,10 @@ namespace Motiv.Controllers
         private readonly ITaskDatastore taskDatastore;
         private readonly IBalanceService balanceService;
 
-        public int Balance => balanceService.Balance;
+        public async Task<int> Balance()
+        {
+            return await balanceService.SpendableBalance();
+        }
 
         public TaskListController(
             ITaskDatastore taskDatastore,

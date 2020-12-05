@@ -2,7 +2,7 @@
 
 namespace Motiv.Core.Models
 {
-    public record Transaction(int Balance, int Amount, string Description)
+    public record Transaction(int Balance, int Amount, string Description, bool Removal)
     {
         public DateTime Date { get; set; } = DateTime.UtcNow;
 

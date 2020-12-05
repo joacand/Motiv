@@ -9,20 +9,20 @@
 <ul class="taskList">
     @foreach (var task in tasks)
     {
-    <li class="taskListItem @task.Style()">
-        <label class="container">
-            <input type="checkbox" disabled="@task.NotCompletable" checked="@task.Completed" @onchange="async eventargs => { await CheckboxClicked(task, eventargs.Value); }">
-            <span class="checkmark"></span>
-            @task.TaskName (@task.Points)
-        </label>
-    </li>
+        <li class="taskListItem @task.Style()">
+            <label class="container">
+                <input type="checkbox" disabled="@task.NotCompletable" checked="@task.Completed" @onchange="async eventargs => { await CheckboxClicked(task, eventargs.Value); }">
+                <span class="checkmark"></span>
+                @task.TaskName (@task.Points)
+            </label>
+        </li>
     }
 </ul>
 
 <br />
 
 <div class="border-bottom">
-    <h6>Balance: @Balance</h6>
+    <h6>Spendable points: @balance</h6>
 </div>
 
 <br />
@@ -39,13 +39,14 @@
 
     private string newTaskName;
     private int newTaskPoints;
-    private int Balance => taskListController.Balance;
+    private int balance;
 
     protected override async Task OnInitializedAsync()
     {
         await taskListController.Init();
         var loadedTasks = await taskListController.Load();
         tasks = new List<Core.Models.MotivTask>(loadedTasks);
+        balance = await taskListController.Balance();
     }
 
     private async Task CheckboxClicked(Core.Models.MotivTask task, object eventValue)
@@ -54,6 +55,8 @@
         task.Completed = value;
 
         await taskListController.CompleteTask(task, value, tasks);
+
+        balance = await taskListController.Balance();
     }
 
     private async Task AddTask()

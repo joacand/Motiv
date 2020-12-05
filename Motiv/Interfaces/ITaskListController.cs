@@ -10,6 +10,6 @@ namespace Motiv.Interfaces
         Task<List<MotivTask>> Load();
         Task Save(List<MotivTask> tasks);
         Task CompleteTask(MotivTask taskCompleted, bool completeState, List<MotivTask> allTasks);
-        int Balance { get; }
+        Task<int> Balance();
     }
 }

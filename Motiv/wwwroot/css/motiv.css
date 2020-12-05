@@ -121,3 +121,24 @@ li.taskListItemNeg {
     background-color: #F3F4F7;
     outline: none;
 }
+
+table.compactTable {
+    width: 100%;
+    border-collapse: collapse;
+    }
+
+tr:nth-of-type(odd) {
+    background: #eee;
+}
+
+th {
+    background: #30324A;
+    color: white;
+}
+
+td, th {
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+

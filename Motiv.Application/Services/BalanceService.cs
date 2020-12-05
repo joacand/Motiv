@@ -10,12 +10,14 @@ namespace Motiv.Application.Services
     public class BalanceService : IBalanceService
     {
         private readonly IUserDataDatastore userDataDatastore;
+        private readonly IConfigurationDatastore configurationDatastore;
 
         private UserData UserData { get; set; }
 
-        public BalanceService(IUserDataDatastore userDataDatastore)
+        public BalanceService(IUserDataDatastore userDataDatastore, IConfigurationDatastore configurationDatastore)
         {
             this.userDataDatastore = userDataDatastore ?? throw new ArgumentNullException(nameof(userDataDatastore));
+            this.configurationDatastore = configurationDatastore ?? throw new ArgumentNullException(nameof(configurationDatastore));
         }
 
         public async Task Init()
@@ -29,13 +31,13 @@ namespace Motiv.Application.Services
         public void SubtractBalance(MotivTask task)
         {
             var newBalance = UserData.CurrentBalance - task.Points;
-            UserData.CreateTransaction(newBalance, task);
+            UserData.CreateTransaction(newBalance, task, true);
         }
 
         public void AddBalance(MotivTask task)
         {
             var newBalance = UserData.CurrentBalance + task.Points;
-            UserData.CreateTransaction(newBalance, task);
+            UserData.CreateTransaction(newBalance, task, false);
         }
 
         public async Task Save()
@@ -44,6 +46,26 @@ namespace Motiv.Application.Services
         }
 
         public int Balance => UserData?.CurrentBalance ?? 0;
+
+        public async Task<int> SpendableBalance()
+        {
+            var useOrLoseValue = (await configurationDatastore.Load()).UseOrLose.Value;
+            var useOrLoseTransactions = Transactions
+                .Reverse<Transaction>()
+                .TakeWhile(x => (x.Date.Date - DateTime.UtcNow.AddDays(-1 * useOrLoseValue)).Days >= 0)
+                .ToList();
+
+            var spendableBalance = 0;
+
+            foreach (var transaction in useOrLoseTransactions)
+            {
+                spendableBalance += transaction.Removal
+                    ? -transaction.Amount
+                    : transaction.Amount;
+            }
+
+            return spendableBalance > 0 ? spendableBalance : 0;
+        }
 
         public List<Transaction> Transactions => UserData?.Transactions ?? new();
 
